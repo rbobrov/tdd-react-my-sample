@@ -1,8 +1,20 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen,  fireEvent} from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+const setup = () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  
+  const applyFilterButton = screen.getByTitle(/Применить фильтры/i);
+  const fiterResults = screen.getByTitle(/Элемент списка/i);
+  return {
+    applyFilterButton,
+    fiterResults
+  }
+}
+
+test('renders filters, search button and the search results', () => {
+  const formControls = setup()
+
+  expect(formControls.applyFilterButton).toBeInTheDocument();
+  expect(formControls.fiterResults).toBeInTheDocument();
 });
